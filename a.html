@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1></h1>
+  <script>
+    if (history.scrollRestoration) {
+      history.scrollRestoration = 'manual';
+    }
+    setTimeout(() => {
+      window.addEventListener('popstate', (e) => {
+        console.log(history)
+        if (e.state) {
+          if (e.state.page == 'checkPrice') {
+            alert(e.state)
+            cbtn()
+            window.history.forward(1);
+          }
+        }
+      })
+      if (!history.state) {
+        window.history.replaceState({ page: 'checkPrice' }, null, '');
+        alert(history.state)
+        window.history.pushState('init', null, '');
+        alert(history.state)
+      }
+    })
+    var cbtn = function () {
+      var btn = document.createElement('BUTTON')
+      var t = document.createTextNode("确定返回");
+      btn.appendChild(t);
+      document.body.appendChild(btn);
+      var btn1 = document.createElement('BUTTON')
+      var t1 = document.createTextNode("不返回");
+      btn1.appendChild(t1);
+      document.body.appendChild(btn1);
+      btn.addEventListener('click', function () {
+        history.go(-2)
+      })
+      btn1.addEventListener('click', function () {
+
+      })
+    }
+  </script>
+</body>
+
+</html>
